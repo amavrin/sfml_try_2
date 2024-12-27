@@ -8,7 +8,10 @@ private:
 	void processEvents();
 	void render();
 	sf::RenderWindow mWindow;
-	sf::CircleShape mPlayer;
+	sf::Texture mTexture;
+	sf::Texture groundTexture;
+	sf::Sprite mPlayer;
+	sf::Sprite groundSprite;
 	void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 	void update(sf::Time deltaTime);
 	bool mIsMovingUp;

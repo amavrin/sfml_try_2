@@ -2,12 +2,26 @@
 
 Game::Game()
 	: mWindow(sf::VideoMode(640, 480), "SFML Application")
+	, mTexture()
+	, groundTexture()
 	, mPlayer()
+	, groundSprite()
 {
-	mPlayer.setRadius(40.f);
+	bool ok = mTexture.loadFromFile("avion.gif");
+	if (!ok) {
+		throw std::exception("error load from spaceship.png");
+	}
+	ok = groundTexture.loadFromFile("ground.png");
+	if (!ok) {
+		throw std::exception("error load from ground.png");
+	}
+	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(100.f, 100.f);
-	mPlayer.setFillColor(sf::Color::Cyan);
+
+	groundSprite.setTexture(groundTexture);
+	groundSprite.setPosition(0.f, 430.f);
 }
+
 void Game::run()
 {
 	sf::Clock clock;
@@ -75,6 +89,7 @@ void Game::update(sf::Time deltaTime)
 void Game::render()
 {
 	mWindow.clear();
+	mWindow.draw(groundSprite);
 	mWindow.draw(mPlayer);
 	mWindow.display();
 }
